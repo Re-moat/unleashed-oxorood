@@ -43,8 +43,8 @@ static DialogMessageButton product_screen(DialogsApp* dialogs, DialogMessage* me
 static DialogMessageButton address_screen(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
-    const char* screen_text = "Flipper Devices Inc\n"
-                              "Suite B #551, 2803\n"
+    const char* screen_text = "If found\n"
+                              "Contact:\n"
                               "Philadelphia Pike, Claymont\n"
                               "DE, USA 19703\n";
 
@@ -60,7 +60,7 @@ static DialogMessageButton compliance_screen(DialogsApp* dialogs, DialogMessage*
 
     const char* screen_text = "For all compliance\n"
                               "certificates please visit:\n"
-                              "www.flipp.dev/compliance";
+                              "www.pornhub.com";
 
     dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
@@ -72,10 +72,10 @@ static DialogMessageButton compliance_screen(DialogsApp* dialogs, DialogMessage*
 static DialogMessageButton unleashed_info_screen(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
-    const char* screen_header = "Unleashed Firmware\n";
+    const char* screen_header = "Oxorood Firmware\n";
 
-    const char* screen_text = "Play with caution.\n"
-                              "Not for illegal use!";
+    const char* screen_text = "Play with fire.\n"
+                              "Not for legal use!";
 
     dialog_message_set_header(message, screen_header, 0, 0, AlignLeft, AlignTop);
     dialog_message_set_text(message, screen_text, 0, 26, AlignLeft, AlignTop);
