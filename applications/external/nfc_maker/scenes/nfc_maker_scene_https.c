@@ -12,18 +12,18 @@ static void nfc_maker_scene_https_text_input_callback(void* context) {
 
 void nfc_maker_scene_https_on_enter(void* context) {
     NfcMaker* app = context;
-    TextInput* text_input = app->text_input;
+    NFCMaker_TextInput* text_input = app->text_input;
 
-    text_input_set_header_text(text_input, "Enter HTTPS Link:");
+    nfc_maker_text_input_set_header_text(text_input, "Enter HTTPS Link:");
 
-    strlcpy(app->text_buf, "google.com", TEXT_INPUT_LEN);
+    strlcpy(app->big_buf, "google.com", BIG_INPUT_LEN);
 
-    text_input_set_result_callback(
+    nfc_maker_text_input_set_result_callback(
         text_input,
         nfc_maker_scene_https_text_input_callback,
         app,
-        app->text_buf,
-        TEXT_INPUT_LEN,
+        app->big_buf,
+        BIG_INPUT_LEN,
         true);
 
     view_dispatcher_switch_to_view(app->view_dispatcher, NfcMakerViewTextInput);
@@ -37,7 +37,7 @@ bool nfc_maker_scene_https_on_event(void* context, SceneManagerEvent event) {
         consumed = true;
         switch(event.event) {
         case TextInputResultOk:
-            scene_manager_next_scene(app->scene_manager, NfcMakerSceneName);
+            scene_manager_next_scene(app->scene_manager, NfcMakerSceneSave);
             break;
         default:
             break;
@@ -49,5 +49,5 @@ bool nfc_maker_scene_https_on_event(void* context, SceneManagerEvent event) {
 
 void nfc_maker_scene_https_on_exit(void* context) {
     NfcMaker* app = context;
-    text_input_reset(app->text_input);
+    nfc_maker_text_input_reset(app->text_input);
 }

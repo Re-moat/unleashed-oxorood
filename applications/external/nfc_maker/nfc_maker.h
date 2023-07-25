@@ -8,7 +8,7 @@
 #include <gui/scene_manager.h>
 #include "nfc_maker_icons.h"
 #include <gui/modules/submenu.h>
-#include <gui/modules/text_input.h>
+#include "nfc_maker_text_input.h"
 #include <gui/modules/byte_input.h>
 #include <gui/modules/popup.h>
 #include "scenes/nfc_maker_scene.h"
@@ -18,8 +18,12 @@
 #include <furi_hal_bt.h>
 #include "strnlen.h"
 
-#define TEXT_INPUT_LEN 248
-#define WIFI_INPUT_LEN 90
+#define MAC_INPUT_LEN GAP_MAC_ADDR_SIZE
+#define MAIL_INPUT_LEN 128
+#define PHONE_INPUT_LEN 17
+
+#define BIG_INPUT_LEN 248
+#define SMALL_INPUT_LEN 90
 
 typedef enum {
     WifiAuthenticationOpen = 0x01,
@@ -42,14 +46,18 @@ typedef struct {
     SceneManager* scene_manager;
     ViewDispatcher* view_dispatcher;
     Submenu* submenu;
-    TextInput* text_input;
+    NFCMaker_TextInput* text_input;
     ByteInput* byte_input;
     Popup* popup;
 
-    uint8_t mac_buf[GAP_MAC_ADDR_SIZE];
-    char text_buf[TEXT_INPUT_LEN];
-    char pass_buf[WIFI_INPUT_LEN];
-    char name_buf[TEXT_INPUT_LEN];
+    uint8_t mac_buf[MAC_INPUT_LEN];
+    char mail_buf[MAIL_INPUT_LEN];
+    char phone_buf[PHONE_INPUT_LEN];
+
+    char big_buf[BIG_INPUT_LEN];
+    char small_buf1[SMALL_INPUT_LEN];
+    char small_buf2[SMALL_INPUT_LEN];
+    char save_buf[BIG_INPUT_LEN];
 } NfcMaker;
 
 typedef enum {

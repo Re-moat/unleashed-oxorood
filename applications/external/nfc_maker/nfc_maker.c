@@ -35,9 +35,11 @@ NfcMaker* nfc_maker_alloc() {
     view_dispatcher_add_view(
         app->view_dispatcher, NfcMakerViewSubmenu, submenu_get_view(app->submenu));
 
-    app->text_input = text_input_alloc();
+    app->text_input = nfc_maker_text_input_alloc();
     view_dispatcher_add_view(
-        app->view_dispatcher, NfcMakerViewTextInput, text_input_get_view(app->text_input));
+        app->view_dispatcher,
+        NfcMakerViewTextInput,
+        nfc_maker_text_input_get_view(app->text_input));
 
     app->byte_input = byte_input_alloc();
     view_dispatcher_add_view(
@@ -56,7 +58,7 @@ void nfc_maker_free(NfcMaker* app) {
     view_dispatcher_remove_view(app->view_dispatcher, NfcMakerViewSubmenu);
     submenu_free(app->submenu);
     view_dispatcher_remove_view(app->view_dispatcher, NfcMakerViewTextInput);
-    text_input_free(app->text_input);
+    nfc_maker_text_input_free(app->text_input);
     view_dispatcher_remove_view(app->view_dispatcher, NfcMakerViewByteInput);
     byte_input_free(app->byte_input);
     view_dispatcher_remove_view(app->view_dispatcher, NfcMakerViewPopup);
@@ -74,7 +76,8 @@ void nfc_maker_free(NfcMaker* app) {
 extern int32_t nfc_maker(void* p) {
     UNUSED(p);
     NfcMaker* app = nfc_maker_alloc();
-    scene_manager_next_scene(app->scene_manager, NfcMakerSceneMenu);
+    scene_manager_set_scene_state(app->scene_manager, NfcMakerSceneStart, NfcMakerSceneHttps);
+    scene_manager_next_scene(app->scene_manager, NfcMakerSceneStart);
     view_dispatcher_run(app->view_dispatcher);
     nfc_maker_free(app);
     return 0;
